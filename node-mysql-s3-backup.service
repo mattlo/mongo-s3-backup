@@ -1,0 +1,15 @@
+[Service]
+ExecStart=/usr/local/bin/npm start /opt/mysql-s3-backup
+StandardOutput=syslog
+StandardError=syslog
+SyslogIdentifier=node-mysql-s3-backup
+User=nobody
+Group=nobody
+Environment=NODE_ENV=production
+
+[Timer]
+OnCalendar=daily
+Persistent=true
+
+[Install]
+WantedBy=timers.target
