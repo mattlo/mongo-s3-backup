@@ -11,8 +11,8 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "aws-sdk": "^2.3.9",
     "dotenv": "^2.0.0",
-    "moment": "^2.13.0",
-    "s3-stream-upload": "^2.0.0"
+    "moment": "^2.13.0"
   }
 }
