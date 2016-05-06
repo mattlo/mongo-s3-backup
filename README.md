@@ -10,6 +10,3 @@ Required Node 4.x+.
 
 ## Usage
 - `npm start`
-
-## Daemon Usage
-- `cp node-mysql-s3-backup.service /etc/systemd/system`
