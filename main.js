@@ -8,8 +8,7 @@ const fileName = prefix +
   'db-' +
   process.env.DB_NAME +
   '-' +
-  moment().format('YYYY-MM-DD-HH-mm-ss') +
-  '.sql';
+  moment().format('YYYY-MM-DD-HH-mm-ss');
 
 backup.uploadToAws({
   Bucket: process.env.AWS_BUCKET_NAME,
