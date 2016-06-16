@@ -13,16 +13,19 @@ module.exports = backup = {
    * @param {String} name
    * @returns {Buffer} stdOut buffer
    */
-  mysqlDump: (user, password, name) => {
+  mongoDump: (user, password, name) => {
     const args = [
-      '-u', user
+      '-u', user,
+      '--authenticationDatabase', 'admin',
+      '-d', name,
+      '--archive' // outputs to stdout
     ];
 
     if (password && password.length > 0) {
       args.push('-p' + password);
     }
 
-    return spawn('mysqldump', args.concat(name))
+    return spawn('mongodump', args)
   },
   /**
    * @param {Object} props

@@ -14,7 +14,7 @@ const fileName = prefix +
 backup.uploadToAws({
   Bucket: process.env.AWS_BUCKET_NAME,
   Key: fileName
-}, backup.mysqlDump(
+}, backup.mongoDump(
   process.env.DB_USER,
   process.env.DB_PASS,
   process.env.DB_NAME
