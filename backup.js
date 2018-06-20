@@ -11,9 +11,10 @@ module.exports = backup = {
    * @param {String} user
    * @param {String} password
    * @param {String} name
+   * @param {String} host
    * @returns {Buffer} stdOut buffer
    */
-  mongoDump: (user, password, name) => {
+  mongoDump: (user, password, name, host) => {
     const args = [
       '-u', user,
       '--authenticationDatabase', 'admin',
@@ -23,6 +24,10 @@ module.exports = backup = {
 
     if (password && password.length > 0) {
       args.push('-p' + password);
+    }
+    
+    if (host && host.length > 0) {
+      args.push('--host ' + host); 
     }
 
     return spawn('mongodump', args)
