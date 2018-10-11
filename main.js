@@ -15,7 +15,7 @@ const fileName = prefix +
 
 backup.uploadToAws({
   Bucket: process.env.AWS_BUCKET_NAME,
-  Key: `${moment.format('YYYY')}/${moment.format('MM')}/${moment.format('DD')}/${fileName}`
+  Key: `${today.format('YYYY')}/${today.format('MM')}/${today.format('DD')}/${fileName}`
 }, backup.mongoDump(
   process.env.DB_USER,
   process.env.DB_PASS,
