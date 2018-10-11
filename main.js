@@ -3,17 +3,19 @@ require('dotenv').config();
 const backup = require('./backup');
 const moment = require('moment');
 
+const today = moment.utc();
+
 const prefix = process.env.PREFIX ? process.env.PREFIX + '-' : '';
 const fileName = prefix +
   'db-' +
   process.env.DB_NAME +
   '-' +
-  moment().format('YYYY-MM-DD-HH-mm-ss') +
+  today.format('YYYY-MM-DD-HH-mm-ss') +
   '.bson';
 
 backup.uploadToAws({
   Bucket: process.env.AWS_BUCKET_NAME,
-  Key: fileName
+  Key: `${moment.format('YYYY')}/${moment.format('MM')}/${moment.format('DD')}/${fileName}`
 }, backup.mongoDump(
   process.env.DB_USER,
   process.env.DB_PASS,
