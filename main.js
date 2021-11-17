@@ -2,6 +2,7 @@
 require('dotenv').config();
 const backup = require('./backup');
 const moment = require('moment');
+const fs = require('fs');
 
 const today = moment.utc();
 
@@ -20,12 +21,15 @@ backup.uploadToAws({
   process.env.DB_USER,
   process.env.DB_PASS,
   process.env.DB_NAME,
-  process.env.DB_HOST
-).stdout)
+  process.env.DB_HOST,
+  fileName
+))
   .send(function(err) {
     if (err) {
       return console.error('failed to upload', e);
     }
+  
+    fs.unlinkSync(fileName);
 
     console.log('Uploaded ' + fileName + ' successfully');
   });
