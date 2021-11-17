@@ -1,6 +1,6 @@
 'use strict';
 
-const spawn = require('child_process').spawn;
+const spawnSync = require('child_process').spawnSync;
 const aws = require('aws-sdk');
 
 aws.config.region = process.env.AWS_BUCKET_REGION;
@@ -12,14 +12,16 @@ module.exports = backup = {
    * @param {String} password
    * @param {String} name
    * @param {String} host
+   * @param {String} filename
    * @returns {Buffer} stdOut buffer
    */
-  mongoDump: (user, password, name, host) => {
+  mongoDump: (user, password, name, host, filename) => {
     const args = [
       '-u', user,
       '--authenticationDatabase', 'admin',
       '-d', name,
-      '--archive' // outputs to stdout
+      // archive filename
+      '--archive=' + filename
     ];
 
     if (password && password.length > 0) {
@@ -30,7 +32,7 @@ module.exports = backup = {
       args.push('--host ' + host); 
     }
 
-    return spawn('mongodump', args)
+    return spawnSync('mongodump', args)
   },
   /**
    * @param {Object} props
