@@ -2,6 +2,7 @@
 
 const spawnSync = require('child_process').spawnSync;
 const aws = require('aws-sdk');
+const fs = require('fs');
 
 aws.config.region = process.env.AWS_BUCKET_REGION;
 
@@ -32,7 +33,9 @@ module.exports = backup = {
       args.push('--host ' + host); 
     }
 
-    return spawnSync('mongodump', args)
+    spawnSync('mongodump', args);
+    
+    return fs.createReadStream(filename);
   },
   /**
    * @param {Object} props
