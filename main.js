@@ -26,7 +26,8 @@ backup.uploadToAws({
 ))
   .send(function(err) {
     if (err) {
-      return console.error('failed to upload', e);
+      fs.unlinkSync(fileName);
+      return console.error('failed to upload', err);
     }
   
     fs.unlinkSync(fileName);
