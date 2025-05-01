@@ -12,7 +12,7 @@ const fileName = prefix +
   process.env.DB_NAME +
   '-' +
   today.format('YYYY-MM-DD-HH-mm-ss') +
-  '.bson';
+  '.zip';
 
 backup.uploadToAws({
   Bucket: process.env.AWS_BUCKET_NAME,
